@@ -431,6 +431,7 @@ Transform your garage, warehouse, patio, showroom, or commercial property with d
 Get pricing for garage epoxy floors, commercial coatings, metallic epoxy, concrete resurfacing, and industrial flooring.
 </p>
 
+<div id="formContainer">
 <form id="intakeForm">
 
 <input type="text" name="name" placeholder="Full Name" required>
@@ -641,21 +642,27 @@ Call Today: (209) 372-5714
 document.getElementById('intakeForm').addEventListener('submit', async function(e) {
     e.preventDefault();
 
-    const formBox = document.getElementById('contact');
+    const formContainer = document.getElementById('formContainer');
     const formData = new FormData(this);
 
-    await fetch("https://script.google.com/macros/s/AKfycbzNinS4d6U9_EHMOrIlcqkjdZ9COYXUvlXyo6OoFI8VwQT2giphAaEuxtRDur853CXm9g/exec", {
-        method: "POST",
-        body: formData
-    });
+    try {
+        await fetch("https://script.google.com/macros/s/AKfycbzNinS4d6U9_EHMOrIlcqkjdZ9COYXUvlXyo6OoFI8VwQT2giphAaEuxtRDur853CXm9g/exec", {
+            method: "POST",
+            body: formData
+        });
 
-    formBox.innerHTML = `
-        <div class="success-message">
-            <span class="success-checkmark">✓</span>
-            <h2>Success!</h2>
-            <p>Your request has been submitted successfully. A local flooring specialist will contact you shortly.</p>
-        </div>
-    `;
+        formContainer.innerHTML = `
+            <div class="success-message">
+                <span class="success-checkmark">✓</span>
+                <h2>Success!</h2>
+                <p>Your request has been submitted successfully. A local flooring specialist will contact you shortly.</p>
+            </div>
+        `;
+
+    } catch (error) {
+        console.log(error);
+        alert("Submission failed. Try again.");
+    }
 });
 </script>
 
