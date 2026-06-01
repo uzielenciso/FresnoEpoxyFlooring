@@ -430,53 +430,32 @@ Transform your garage, warehouse, patio, showroom, or commercial property with d
 Get pricing for garage epoxy floors, commercial coatings, metallic epoxy, concrete resurfacing, and industrial flooring.
 </p>
 
-<form
-id="intakeForm"
-action="https://docs.google.com/forms/u/1/d/e/1FAIpQLSdEjYew-Hf6BICiLuSgwUORb2bAvGwoxJWOdjoC-1ctS-UDvg/formResponse?pli=1"
-method="POST"
-target="hidden_iframe">
+<div class="form-box" id="contact">
 
-<input
-type="text"
-name="entry.2005620554"
-placeholder="Full Name"
-required>
+<h2>Request a Fast Quote</h2>
 
-<input
-type="tel"
-name="entry.1045781291"
-placeholder="Phone Number"
-required>
+<p>
+Get pricing for garage epoxy floors, commercial coatings, metallic epoxy, concrete resurfacing, and industrial flooring.
+</p>
 
-<input
-type="email"
-name="entry.1065046570"
-placeholder="Email Address">
+<form id="intakeForm">
 
-<input
-type="text"
-name="entry.1166974658"
-placeholder="City">
+<input type="text" name="name" placeholder="Full Name" required>
 
-<textarea
-name="entry.839337160"
-placeholder="Tell us about your project">
-</textarea>
+<input type="tel" name="phone" placeholder="Phone Number" required>
 
-<button type="submit">
-Get My Free Quote
-</button>
+<input type="email" name="email" placeholder="Email Address">
 
-</form>
+<input type="text" name="city" placeholder="City">
 
-<iframe
-name="hidden_iframe"
-style="display:none;">
-</iframe>
+<textarea name="message" placeholder="Tell us about your project"></textarea>
+
+<button type="submit">Get My Free Quote</button>
 
 </form>
 
 </div>
+
 
 </div>
 
@@ -666,29 +645,27 @@ Call Today: (209) 372-5714
 
 <!-- Form Submission JavaScript Handler -->
 <script>
-
-document.getElementById('intakeForm').addEventListener('submit', function() {
+document.getElementById('intakeForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
 
     const formBox = document.getElementById('contact');
+    const formData = new FormData(this);
 
-    setTimeout(() => {
+    await fetch("https://script.google.com/macros/s/AKfycbzNinS4d6U9_EHMOrIlcqkjdZ9COYXUvlXyo6OoFI8VwQT2giphAaEuxtRDur853CXm9g/exec", {
+        method: "POST",
+        body: formData
+    });
 
-        formBox.innerHTML = `
-            <div class="success-message">
-                <span class="success-checkmark">✓</span>
-                <h2>Success!</h2>
-                <p>
-                Your request has been submitted successfully.
-                A local flooring specialist will contact you shortly.
-                </p>
-            </div>
-        `;
-
-    }, 500);
-
+    formBox.innerHTML = `
+        <div class="success-message">
+            <span class="success-checkmark">✓</span>
+            <h2>Success!</h2>
+            <p>Your request has been submitted successfully. A local flooring specialist will contact you shortly.</p>
+        </div>
+    `;
 });
-
 </script>
+
 
 
 </body>
